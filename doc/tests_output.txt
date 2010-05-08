@@ -1,0 +1,58 @@
+[host]$./run_all_tests.py 
+Test request parser correctly passes custom facility to Message ... ok
+Test request parser correctly passes custom priority to Message ... ok
+Test request parser correctly passes basic msg to Message ... ok
+Test that the singleton trait is enforced with the Config class ... ok
+Test that defaults are set properly when no config file exists ... ok
+Test that the configs are not reinitialized with every call ... ok
+Test the boolean validators accept true booleans and not just strings ... ok
+Passing Config a non-existent file should result in exception ... ok
+Test an override of all of the server option defaults ... ok
+Test an override of all of the message option defaults ... ok
+Test an override of all of the security option defaults ... ok
+Test an override of all of the syslog option defaults ... ok
+Test an override of a mix of options across sections ... ok
+Test an override of a subset of the message option defaults ... ok
+Test that shared_secret must be set if require_token is overriden to true ... ok
+Test an override of a subset of the server option defaults ... ok
+Test an override of a subset of the syslog option defaults ... ok
+Test init of SyslogWriter results in correct defaults ... ok
+Confirm singleton behavior is enforced for SyslogWriter ... ok
+Test that disabled=True results in success for all writes ... ok
+Test Message object is not singleton ... ok
+Test default attribute values are correct after minimum initialization ... ok
+Test message init will accept custom parameters ... ok
+Test message init will accept custom facility ... ok
+Test message init will accept custom priority ... ok
+Test basic Message object initialization ... ok
+Test repr message will return good string for an invalid message ... ok
+Test repr message will return good string for a valid message ... ok
+Test that appname string is required for Message initialization ... ok
+Test that hostname is required for Message initialization ... ok
+Test that msg string is required for Message initialization ... ok
+Test that parameters are required for Message initialization ... ok
+Test message write status when syslog write fails ... ok
+Test message write status when syslog write succeeds ... ok
+Test that a invalid facility will be rejected ... ok
+Test that a invalid priority will be rejected ... ok
+Test that a None appname will be rejected ... ok
+Test that a None hostname will be rejected ... ok
+Test that a None msg will be rejected ... ok
+Test that a bad appname string will be rejected ... ok
+Test that a bad hostname string will be rejected ... ok
+Test that a bad msg string will be rejected ... ok
+Test request authorization fails with known bad data ... ok
+Test authorization will fail if token is not present ... ok
+Test authorization succeeds if require_token is disabled ... ok
+Test request authorization succeeds with known good data ... ok
+Test the token generator requires a msg string and a secret string ... ok
+Test the token generator returns expected tokens ... ok
+
+----------------------------------------------------------------------
+Ran 48 tests in 0.011s
+
+OK
+[host]$
+
+
+

@@ -1,0 +1,108 @@
+
+<html>
+<body>
+<h2>Ocelog</h2>
+<p>Ocelog is an http gateway to syslog</p>
+<p>&nbsp;</p>
+<h3>Examples</h3>
+
+<h4>A simple message post with minimum parameters</h4>
+<pre>
+[host]$curl -v -X POST -H "Content-Type:application/x-www-form-urlencoded" "http://localhost:8888/log" -d"appname=testapp" -d"msg=some event occured"
+> POST /log HTTP/1.1
+> User-Agent: curl/7.16.3 (powerpc-apple-darwin8.0) libcurl/7.16.3 OpenSSL/0.9.7l zlib/1.2.3
+> Host: localhost:8888
+> Accept: */*
+> Content-Type:application/x-www-form-urlencoded
+> Content-Length: 38
+> 
+< HTTP/1.0 201 CREATED
+< Date: Tue, 13 Apr 2010 05:32:35 GMT
+< Server: WSGIServer/0.1 Python/2.6.4
+< Content-Type: text/html
+< Content-Length: 0
+< 
+</pre>
+
+
+<h4>A complex message with more custom parameters</h4>
+<pre>
+[host]$curl -v -X POST -H "Content-Type:application/x-www-form-urlencoded" "http://localhost:8888/log" -d"facility=local1" -d"priority=info" -d"hostname=servicehost1" -d"appname=testapp" -d"msg=some event occured"
+> POST /log HTTP/1.1
+> User-Agent: curl/7.16.3 (powerpc-apple-darwin8.0) libcurl/7.16.3 OpenSSL/0.9.7l zlib/1.2.3
+> Host: localhost:8888
+> Accept: */*
+> Content-Type:application/x-www-form-urlencoded
+> Content-Length: 90
+> 
+< HTTP/1.0 201 CREATED
+< Date: Tue, 13 Apr 2010 05:34:38 GMT
+< Server: WSGIServer/0.1 Python/2.6.4
+< Content-Type: text/html
+< Content-Length: 0
+< 
+</pre>
+
+
+<h4>A message with an invalid facility</h4>
+<pre>
+[host]$curl -v -X POST -H "Content-Type:application/x-www-form-urlencoded" "http://localhost:8888/log" -d"facility=no-such-facility" -d"appname=testapp" -d"msg=some event occured"
+> POST /log HTTP/1.1
+> User-Agent: curl/7.16.3 (powerpc-apple-darwin8.0) libcurl/7.16.3 OpenSSL/0.9.7l zlib/1.2.3
+> Host: localhost:8888
+> Accept: */*
+> Content-Type:application/x-www-form-urlencoded
+> Content-Length: 64
+> 
+< HTTP/1.0 400 BAD REQUEST
+< Date: Tue, 13 Apr 2010 05:35:11 GMT
+< Server: WSGIServer/0.1 Python/2.6.4
+< Content-Type: text/html
+< X-Ocelog-Error: Message included invalid facility
+< Content-Length: 0
+< 
+</pre>
+
+
+<h4>A message sending a valid security token for authorization</h4>
+<pre>
+[host]$curl -v -X POST -H "Content-Type:application/x-www-form-urlencoded" "http://localhost:8888/log" -d"appname=testapp" -d"msg=the coffee pot volume is low" -H "x-token:7d187dda6fcdc56f33832fbbca740808"
+> POST /log HTTP/1.1
+> User-Agent: curl/7.16.3 (powerpc-apple-darwin8.0) libcurl/7.16.3 OpenSSL/0.9.7l zlib/1.2.3
+> Host: localhost:8888
+> Accept: */*
+> Content-Type:application/x-www-form-urlencoded
+> x-token:7d187dda6fcdc56f33832fbbca740808
+> Content-Length: 48
+> 
+< HTTP/1.0 201 CREATED
+< Date: Tue, 13 Apr 2010 05:37:57 GMT
+< Server: WSGIServer/0.1 Python/2.6.4
+< Content-Type: text/html
+< Content-Length: 0
+< 
+</pre>
+
+<h4>A message sending an invalid security token for authorization</h4>
+<pre>
+[host]$curl -v -X POST -H "Content-Type:application/x-www-form-urlencoded" "http://localhost:8888/log" -d"appname=testapp" -d"msg=the coffee pot volume is low" -H "x-token:bad token here 6f33832fbbca740808"
+> POST /log HTTP/1.1
+> User-Agent: curl/7.16.3 (powerpc-apple-darwin8.0) libcurl/7.16.3 OpenSSL/0.9.7l zlib/1.2.3
+> Host: localhost:8888
+> Accept: */*
+> Content-Type:application/x-www-form-urlencoded
+> x-token:bad token here 6f33832fbbca740808
+> Content-Length: 48
+> 
+< HTTP/1.0 400 BAD REQUEST
+< Date: Tue, 13 Apr 2010 05:38:17 GMT
+< Server: WSGIServer/0.1 Python/2.6.4
+< Content-Type: text/html
+< X-Ocelog-Error: Request failed authorization
+< Content-Length: 0
+< 
+</pre>
+
+
+</body>
+</html>

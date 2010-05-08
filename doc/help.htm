@@ -1,0 +1,26 @@
+<html>
+    <body>
+        <h2>Ocelog</h2>
+        <p>Ocelog is an http gateway to syslog</p>
+        <p>&nbsp;</p>
+        <h3>The API</h3>
+        <p>
+        <ul>
+            <li>GET  / </li>
+                <ul><li>Returns this document</li></ul>
+            <li>POST /log </li>
+            <ul>
+                <li>Accepts an x-www-form-urlencoded post of data and writes it to syslog</li>
+                <li> required: "appname" - string - the name or identifier of the log source</li>
+                <li> required: "msg" - string - the message to be writter</li>
+                <li> optional: "hostname" - The fqdn, hostname, or ip of the source host.  The client ip will be used if this is not provided.</li>
+                <li> optional: "facility" - A valid syslog facility to use when writing the log</li>
+                <li> optional: "priority" - A valid syslog priority to use when writing the log</li>
+                <li>Returns a 201 on success and a 400 on failure</li>
+                <li>Adds a message to x-ocelog-error header upon failure</li>
+            </ul>
+        </ul>
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+    </body>
+</html>
