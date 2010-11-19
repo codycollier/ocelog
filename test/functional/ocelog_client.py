@@ -13,14 +13,14 @@ class OcelogResponse(object):
         """ Accept and parse an httplib.HTTPResponse object """
         self.status_code = http_response.status
         self.status_msg = http_response.reason
-        self.POST = {}
+        self.headers = {}
         for key,value in http_response.getheaders():
-            self.POST[key] = value
+            self.headers[key] = value
         self.body = http_response.read()
 
 
 class OcelogClient(object):
-    """ A simple wrapper around httplib.HTTPConnetion """
+    """ A simple wrapper around httplib.HTTPConnection """
 
     def __init__(self, server, port):
         """ Initialize the request object with common configs """
